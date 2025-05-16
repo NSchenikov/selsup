@@ -18,7 +18,7 @@ interface Color {
   hex: string;
 }
 
-interface Model {
+export interface Model {
   paramValues: ParamValue[];
   colors: Color[];
 }
