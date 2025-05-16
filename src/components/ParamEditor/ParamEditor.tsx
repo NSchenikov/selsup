@@ -28,6 +28,10 @@ interface Props {
   model: Model;
 }
 
+export interface ParamEditorRef {
+  getModel: () => Model;
+}
+
 const StringParamInput = ({ param, value, onChange }: {
   param: Param;
   value: string;
@@ -44,7 +48,7 @@ const StringParamInput = ({ param, value, onChange }: {
   </div>
 );
 
-export const ParamEditor = forwardRef((props: Props, ref) => {
+export const ParamEditor = forwardRef<ParamEditorRef, Props>((props, ref) => {
   const [paramValues, setParamValues] = useState<Record<number, string>>(() => {
     const initial: Record<number, string> = {};
     props.model.paramValues.forEach(({ paramId, value }) => {

@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { ParamEditor, Param, Model } from './components/ParamEditor/ParamEditor';
+import { useRef, useState } from 'react';
+import { ParamEditor, Param, Model, ParamEditorRef } from './components/ParamEditor/ParamEditor';
 
 const params: Param[] = [
   { id: 1, name: 'Назначение', type: 'string' },
@@ -15,17 +15,26 @@ const model: Model = {
 };
 
 function App() {
-  const editorRef = useRef<{ getModel: () => Model }>(null);
+  const editorRef = useRef<ParamEditorRef>(null);
+  const [output, setOutput] = useState<Model | null>(null);
 
   const handleSubmit = () => {
     const updatedModel = editorRef.current?.getModel();
-    console.log(updatedModel);
+    if (updatedModel) {
+      setOutput(updatedModel);
+    }
   };
 
   return (
-    <div>
+    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
       <ParamEditor ref={editorRef} params={params} model={model} />
       <button onClick={handleSubmit}>Получить модель</button>
+
+      {output && (
+        <pre style={{ marginTop: '20px', background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+          {JSON.stringify(output, null, 2)}
+        </pre>
+      )}
     </div>
   );
 }
