@@ -1,0 +1,17 @@
+.param-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .param-label {
+    width: 160px;
+    font-weight: 500;
+  }
+  
+  .param-field {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    border-radius: 4px;
+    width: 240px;
+  }
